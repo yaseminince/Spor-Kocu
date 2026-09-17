@@ -1,0 +1,159 @@
+﻿@page
+@model Sporkocu.Web.Pages.Question.DetailModel
+
+@{
+    Layout = "_UserLayout";
+    ViewData["Title"] = "Soru Detayı";
+}
+
+<div class="container py-5">
+
+    <div class="mb-4">
+        <a href="/Question/List"
+           class="text-success text-decoration-none">
+            ← Sorulara Dön
+        </a>
+    </div>
+
+
+    <div class="question-card">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+
+                <span class="badge bg-light text-success mb-3">
+                    Soru
+                </span>
+
+                <h1 class="fw-bold mb-3">
+                    @Model.Question.Title
+                </h1>
+
+                <p class="question-description">
+                    @Model.Question.Description
+                </p>
+
+            </div>
+
+
+            @if (Model.IsOwner)
+            {
+                <div class="d-flex gap-2">
+
+                    <a href="/Question/Update?id=@Model.Question.Id"
+                       class="btn btn-outline-success btn-sm">
+                        Düzenle
+                    </a>
+
+                    <a href="/Question/Delete?id=@Model.Question.Id"
+                       class="btn btn-outline-danger btn-sm">
+                        Sil
+                    </a>
+
+                </div>
+            }
+
+        </div>
+
+
+        <hr class="my-4" />
+
+
+        @if (Model.Answer == null)
+        {
+            <div class="waiting-answer">
+
+                <div class="waiting-icon">
+                    ⏳
+                </div>
+
+                <h4 class="fw-bold">
+                    Henüz cevaplanmadı
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Koçunuz sorunuza cevap verdiğinde
+                    cevabı burada görüntüleyebilirsiniz.
+                </p>
+
+            </div>
+        }
+        else
+        {
+            <div class="answer-section">
+
+                <div class="answer-title">
+                    Koçunuzun Cevabı
+                </div>
+
+                <div class="answer-card">
+
+                    <p>
+                        @Model.Answer.Description
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .question-card {
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .question-description {
+        color: #59655e;
+        font-size: 16px;
+        line-height: 1.7;
+        max-width: 850px;
+    }
+
+    .waiting-answer {
+        background: #f8faf9;
+        border-radius: 15px;
+        padding: 35px;
+        text-align: center;
+    }
+
+    .waiting-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .answer-section {
+        margin-top: 10px;
+    }
+
+    .answer-title {
+        color: #198754;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .answer-card {
+        background: #f8faf9;
+        border-left: 4px solid #198754;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+        .answer-card p {
+            margin: 0;
+            line-height: 1.7;
+            color: #45524a;
+        }
+
+</style>

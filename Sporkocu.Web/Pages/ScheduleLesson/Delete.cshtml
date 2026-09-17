@@ -1,0 +1,57 @@
+﻿@page
+@model Sporkocu.Web.Pages.ScheduleLesson.DeleteModel
+
+@{
+    ViewData["Title"] = "Ders Sil";
+    Layout = "_UserLayout";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Dersi Sil</h2>
+
+    <div class="alert alert-warning">
+        Bu dersi silmek istediğine emin misin?
+    </div>
+
+    @if (Model.ScheduleLesson != null)
+    {
+        <div class="mb-4">
+            <p>
+                <strong>Tarih:</strong>
+                @Model.ScheduleLesson.StartTime.ToString("dd.MM.yyyy")
+            </p>
+
+            <p>
+                <strong>Saat:</strong>
+                @Model.ScheduleLesson.StartHour -
+                @Model.ScheduleLesson.EndHour
+            </p>
+
+            @if (!string.IsNullOrWhiteSpace(Model.ScheduleLesson.Note))
+            {
+                <p>
+                    <strong>Not:</strong>
+                    @Model.ScheduleLesson.Note
+                </p>
+            }
+        </div>
+    }
+
+    <form method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit"
+                class="btn btn-danger">
+            Evet, Sil
+        </button>
+
+        <a asp-page="/ScheduleLesson/List"
+           class="btn btn-secondary">
+            Vazgeç
+        </a>
+
+    </form>
+
+</div>

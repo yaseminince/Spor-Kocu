@@ -1,0 +1,91 @@
+﻿@page
+@model Sporkocu.Web.Pages.ScheduleLesson.ListModel
+
+@{
+    ViewData["Title"] = "Ders Programım";
+    Layout = "_UserLayout";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Ders Programım</h2>
+            <p class="text-muted mb-0">
+                Planladığın dersleri buradan yönetebilirsin.
+            </p>
+        </div>
+
+        <a asp-page="/ScheduleLesson/Create"
+           class="btn btn-primary">
+            + Yeni Ders
+        </a>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    @if (Model.ScheduleLessons.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Başlangıç</th>
+                        <th>Bitiş</th>
+                        <th>Not</th>
+                        <th style="width: 180px;">İşlemler</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var lesson in Model.ScheduleLessons)
+                    {
+                        <tr>
+                            <td>
+                                @lesson.StartTime.ToString("dd.MM.yyyy")
+                            </td>
+
+                            <td>
+                                @lesson.StartHour
+                            </td>
+
+                            <td>
+                                @lesson.EndHour
+                            </td>
+
+                            <td>
+                                @(string.IsNullOrWhiteSpace(lesson.Note)
+                                    ? "-"
+                                    : lesson.Note)
+                            </td>
+
+                            <td>
+                                <a asp-page="/ScheduleLesson/Update"
+                                   asp-route-id="@lesson.Id"
+                                   class="btn btn-sm btn-warning">
+                                    Düzenle
+                                </a>
+
+                                <a asp-page="/ScheduleLesson/Delete"
+                                   asp-route-id="@lesson.Id"
+                                   class="btn btn-sm btn-danger">
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Henüz oluşturduğun bir ders bulunmuyor.
+        </div>
+    }
+
+</div>

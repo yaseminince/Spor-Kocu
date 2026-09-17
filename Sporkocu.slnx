@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Sporkocu.API/Sporkocu.API.csproj" />
+  <Project Path="Sporkocu.Application/Sporkocu.Application.csproj" />
+  <Project Path="Sporkocu.Domain/Sporkocu.Domain.csproj" />
+  <Project Path="Sporkocu.Infrastructure/Sporkocu.Infrastructure.csproj" />
+  <Project Path="Sporkocu.Web/Sporkocu.Web.csproj" />
+</Solution>

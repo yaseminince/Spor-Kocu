@@ -1,0 +1,73 @@
+﻿@page
+@model Sporkocu.Web.Pages.Blog.DetailModel
+
+@{
+    ViewData["Title"] = Model.Blog.Title;
+    Layout = Model.IsAdmin ? "_AdminLayout" : "_UserLayout";
+}
+
+<div class="container mt-5">
+
+    <div class="mb-4">
+
+        @if (Model.IsAdmin)
+        {
+            <a href="/Blog/List?mode=admin" class="btn btn-secondary">
+                ← Tüm Bloglara Dön
+            </a>
+        }
+        else
+        {
+            <a href="/Blog/List" class="btn btn-secondary">
+                ← Tüm Bloglara Dön
+            </a>
+        }
+
+    </div>
+
+    <article>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Blog.CoverImagePath))
+        {
+            <div class="mb-4">
+                <img src="@Model.Blog.CoverImagePath"
+                     alt="@Model.Blog.Title"
+                     class="img-fluid rounded"
+                     style="max-height: 400px; width: 100%; object-fit: cover;" />
+            </div>
+        }
+
+        <div class="mb-3">
+
+            @if (Model.Category != null)
+            {
+                <span class="badge bg-success">
+                    @Model.Category.Title
+                </span>
+            }
+
+        </div>
+
+        <h1 class="mb-3">
+            @Model.Blog.Title
+        </h1>
+
+        @if (!string.IsNullOrWhiteSpace(Model.Blog.SubTitle))
+        {
+            <h5 class="text-muted mb-4">
+                @Model.Blog.SubTitle
+            </h5>
+        }
+
+        <hr />
+
+        <div class="mt-4"
+             style="font-size: 17px; line-height: 1.8;">
+
+            @Html.Raw(Model.Blog.HtmlContent)
+
+        </div>
+
+    </article>
+
+</div>

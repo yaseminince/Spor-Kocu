@@ -1,0 +1,156 @@
+﻿@page
+@model Sporkocu.Web.Pages.Answer.ListModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Cevaplar";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <div>
+            <h1 class="fw-bold mb-2">
+                Cevaplar
+            </h1>
+
+            <p class="text-muted mb-0">
+                Kullanıcı sorularına verilen cevapları yönetin.
+            </p>
+        </div>
+
+        <a href="/Answer/Create?mode=admin"
+           class="btn btn-success">
+            + Yeni Cevap
+        </a>
+
+    </div>
+
+
+    @if (!Model.Answers.Any())
+    {
+        <div class="empty-card">
+
+            <div class="empty-icon">
+                💬
+            </div>
+
+            <h4 class="fw-bold mt-3">
+                Henüz cevap bulunmuyor.
+            </h4>
+
+            <p class="text-muted mb-0">
+                Kullanıcı sorularını cevapladığınızda burada görüntülenir.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        <div class="answer-list">
+
+            @foreach (var answer in Model.Answers)
+            {
+                <div class="answer-card">
+
+                    <div class="answer-info">
+
+                        <div class="answer-question">
+                            Soru #@answer.QuestionId
+                        </div>
+
+                        <div class="answer-description">
+                            @answer.Description
+                        </div>
+
+                        <div class="answer-meta">
+                            Cevaplayan Kullanıcı ID: @answer.UserId
+                        </div>
+
+                    </div>
+
+
+                    <div class="answer-actions">
+
+                        <a href="/Answer/Update?id=@answer.Id&mode=admin"
+                           class="btn btn-outline-success btn-sm">
+                            Düzenle
+                        </a>
+
+                        <a href="/Answer/Delete?id=@answer.Id&mode=admin"
+                           class="btn btn-outline-danger btn-sm">
+                            Sil
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+
+<style>
+
+    .answer-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .answer-card {
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .answer-info {
+        flex: 1;
+    }
+
+    .answer-question {
+        color: #198754;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .answer-description {
+        color: #37423b;
+        line-height: 1.6;
+        margin-bottom: 8px;
+    }
+
+    .answer-meta {
+        font-size: 13px;
+        color: #8a958f;
+    }
+
+    .answer-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .empty-card {
+        background: white;
+        border: 1px dashed #cfd8d3;
+        border-radius: 18px;
+        padding: 60px;
+        text-align: center;
+    }
+
+    .empty-icon {
+        font-size: 38px;
+    }
+
+</style>

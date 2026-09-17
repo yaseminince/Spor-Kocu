@@ -1,0 +1,89 @@
+﻿@page
+@model Sporkocu.Web.Pages.Answer.CreateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Cevap Ver";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h1 class="fw-bold">Cevap Ver</h1>
+
+        <p class="text-muted">
+            Kullanıcının sorusunu cevaplayın.
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="text-success fw-bold mb-2">
+                SORU
+            </div>
+
+            <h3 class="fw-bold mb-3">
+                @Model.Question.Title
+            </h3>
+
+            <p class="text-muted mb-0">
+                @Model.Question.Description
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm p-4">
+
+        <form method="post">
+
+            <input type="hidden"
+                   name="questionId"
+                   value="@Model.Question.Id" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Answer.Description"
+                       class="form-label fw-semibold">
+                    Cevabınız
+                </label>
+
+                <textarea asp-for="Answer.Description"
+                          class="form-control"
+                          rows="8"
+                          placeholder="Soruyu cevaplayın..."></textarea>
+
+                <span asp-validation-for="Answer.Description"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-success px-4">
+                    Cevabı Gönder
+                </button>
+
+                <a href="/Question/List?mode=admin"
+                   class="btn btn-outline-secondary">
+                    Vazgeç
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

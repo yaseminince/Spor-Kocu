@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - SporKocu</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/cssue" />
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm mb-3">
+
+            <div class="container=" /Index">
+                🏋️ SporKocu
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           asp-page="/Login/Index">
+                            Giriş Yap
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           asp-page="/Register/Index">
+                            Kayıt Ol
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <main role="main" class="pb-3">
+
+        @RenderBody()
+
+    </main>
+
+</div>
+
+<footer class="border-top footer text-muted mt-5">
+
+    <div class="container">
+
+        © 2026 - SporKocu
+
+    </div>
+
+</footer>
+
+~/lib/jquery/dist/jquery.min.jsscript>
+
+~/lib/bootstrap/dist/js/bootstrap.bundle.min.jsscript>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

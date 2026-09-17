@@ -1,0 +1,134 @@
+﻿@page
+@model Sporkocu.Web.Pages.NutritionPlanDetail.DeleteModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Öğünü Sil";
+}
+
+<div class="container py-5">
+
+    <div class="delete-card">
+
+        <div class="delete-icon">
+            🗑️
+        </div>
+
+        <h2 class="fw-bold mt-3">
+            Öğünü Sil
+        </h2>
+
+        <p class="text-muted">
+            Bu öğünü beslenme planından silmek istediğinizden emin misiniz?
+        </p>
+
+
+        <div class="detail-preview">
+
+            <div class="meal-name">
+                @Model.Detail.Meal
+            </div>
+
+            @if (Model.Food != null)
+            {
+                <h4 class="fw-bold mb-1">
+                    @Model.Food.Title
+                </h4>
+
+                <div class="nutrition-info">
+
+                    <span>
+                        🔥 @Model.Food.Calorie kcal
+                    </span>
+
+                    <span>
+                        Protein: @Model.Food.Protein
+                    </span>
+
+                    <span>
+                        Karbonhidrat: @Model.Food.Carbonhydrate
+                    </span>
+
+                    <span>
+                        Yağ: @Model.Food.Oil
+                    </span>
+
+                </div>
+            }
+
+        </div>
+
+
+        <form method="post">
+
+            <input type="hidden"
+                   name="id"
+                   value="@Model.Detail.Id" />
+
+            <input type="hidden"
+                   name="mode"
+                   value="admin" />
+
+
+            <div class="d-flex justify-content-center gap-2 mt-4">
+
+                <a href="/NutritionPlan/List?mode=admin"
+                   class="btn btn-outline-secondary">
+                    Vazgeç
+                </a>
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Evet, Sil
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .delete-card {
+        max-width: 650px;
+        margin: 50px auto;
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 18px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .delete-icon {
+        font-size: 40px;
+    }
+
+    .detail-preview {
+        background: #f8faf9;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .meal-name {
+        color: #198754;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .nutrition-info {
+        display: flex;
+        gap: 15px;
+        color: #737e78;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+</style>

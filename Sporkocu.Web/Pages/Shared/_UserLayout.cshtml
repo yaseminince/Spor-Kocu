@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - SporKocu</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+    <style>
+            body {
+                background-color: #f8faf9;
+                color: #263238;
+                font-family: Arial, sans-serif;
+            }
+
+            .navbar {
+                min-height: 70px;
+            }
+
+            .navbar-brand {
+                font-size: 22px;
+                letter-spacing: 1px;
+            }
+
+            .nav-link {
+                color: #37474f !important;
+                margin-left: 12px;
+                font-weight: 500;
+            }
+
+                .nav-link:hover {
+                    color: #198754 !important;
+                }
+
+            main {
+                padding-top: 10px;
+                padding-bottom: 40px;
+            }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold text-success"
+               asp-page="/UserDashboard/Dashboard">
+                Spor Koçu
+            </a>
+
+            <div class="navbar-nav ms-auto align-items-center">
+
+                <a class="nav-link" href="/UserDashboard/Dashboard">
+                    Dashboard
+                </a>
+
+                <a class="nav-link" href="/Blog/List">
+                    Blog
+                </a>
+
+                <a class="nav-link" href="/Exercise/List">
+                    Egzersizler
+                </a>
+
+                <a class="nav-link" href="/Food/List">
+                    Besinler
+                </a>
+
+                <a class="nav-link" href="/Question/List">
+                    Koçum
+                </a>
+
+                <a class="nav-link" href="/NutritionPlan/List">
+                    Beslenme Planım
+                </a>
+
+                <a class="nav-link" href="/User/MyProfile">
+                    Profilim
+                </a>
+
+                <a class="nav-link" href="/Index">
+                    Çıkış Yap
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

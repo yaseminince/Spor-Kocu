@@ -1,0 +1,125 @@
+﻿@page
+@model Sporkocu.Web.Pages.Food.UpdateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Besin Güncelle";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h1 class="fw-bold">Besin Güncelle</h1>
+        <p class="text-muted">
+            Besin bilgilerini düzenleyin.
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm p-4">
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3">
+            </div>
+
+            <input type="hidden" asp-for="Food.Id" />
+
+            <div class="mb-3">
+                <label asp-for="Food.Title"
+                       class="form-label fw-semibold">
+                    Besin Adı
+                </label>
+
+                <input asp-for="Food.Title"
+                       class="form-control" />
+
+                <span asp-validation-for="Food.Title"
+                      class="text-danger">
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Food.Description"
+                       class="form-label fw-semibold">
+                    Açıklama
+                </label>
+
+                <textarea asp-for="Food.Description"
+                          class="form-control"
+                          rows="4">
+                </textarea>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Food.Calorie"
+                           class="form-label fw-semibold">
+                        Kalori
+                    </label>
+
+                    <input asp-for="Food.Calorie"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Food.Protein"
+                           class="form-label fw-semibold">
+                        Protein
+                    </label>
+
+                    <input asp-for="Food.Protein"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Food.Carbonhydrate"
+                           class="form-label fw-semibold">
+                        Karbonhidrat
+                    </label>
+
+                    <input asp-for="Food.Carbonhydrate"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Food.Oil"
+                           class="form-label fw-semibold">
+                        Yağ
+                    </label>
+
+                    <input asp-for="Food.Oil"
+                           class="form-control" />
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Food.Image"
+                       class="form-label fw-semibold">
+                    Görsel URL
+                </label>
+
+                <input asp-for="Food.Image"
+                       class="form-control" />
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+                    Güncelle
+                </button>
+
+                <a href="/Food/List?mode=admin"
+                   class="btn btn-outline-secondary">
+                    İptal
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@page
+@model Sporkocu.Web.Pages.Question.DeleteModel
+
+@{
+    ViewData["Title"] = "Soruyu Sil";
+    Layout = Model.IsAdmin ? "_AdminLayout" : "_UserLayout";
+}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Soruyu Sil</h2>
+
+    <div class="alert alert-warning">
+        Bu soruyu silmek istediğine emin misin?
+    </div>
+
+    @if (Model.Question != null)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <h4>
+                    @Model.Question.Title
+                </h4>
+
+                <p class="text-muted mb-0">
+                    @Model.Question.Description
+                </p>
+
+            </div>
+        </div>
+    }
+
+    <form method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        @if (Model.IsAdmin)
+        {
+            <input type="hidden" name="mode" value="admin" />
+        }
+
+        <button type="submit"
+                class="btn btn-danger">
+            Evet, Sil
+        </button>
+
+        @if (Model.IsAdmin)
+        {
+            <a href="/Question/List?mode=admin"
+               class="btn btn-secondary">
+                Vazgeç
+            </a>
+        }
+        else
+        {
+            <a href="/Question/List"
+               class="btn btn-secondary">
+                Vazgeç
+            </a>
+        }
+
+    </form>
+
+</div>

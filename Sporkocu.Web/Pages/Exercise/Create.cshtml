@@ -1,0 +1,185 @@
+﻿@page
+@model Sporkocu.Web.Pages.Exercise.CreateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Yeni Egzersiz";
+}
+
+<div class="container py-5">
+
+    <div class="form-wrapper">
+
+        <div class="mb-4">
+
+            <span class="page-badge">
+                EGZERSİZ
+            </span>
+
+            <h1 class="fw-bold mt-3 mb-2">
+                Yeni Egzersiz
+            </h1>
+
+            <p class="text-muted">
+                Sisteme yeni bir egzersiz ekleyin.
+            </p>
+
+        </div>
+
+        <form method="post">
+
+            <input type="hidden"
+                   name="mode"
+                   value="admin" />
+
+            <div asp-validation-summary="All"
+                 class="text-danger mb-3">
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Exercise.Title"
+                       class="form-label fw-semibold">
+                    Egzersiz Adı
+                </label>
+
+                <input asp-for="Exercise.Title"
+                       class="form-control"
+                       placeholder="Örn. Squat" />
+
+                <span asp-validation-for="Exercise.Title"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Exercise.Description"
+                       class="form-label fw-semibold">
+                    Açıklama
+                </label>
+
+                <textarea asp-for="Exercise.Description"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Egzersiz hakkında açıklama yazın."></textarea>
+
+                <span asp-validation-for="Exercise.Description"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Exercise.CategoryId"
+                       class="form-label fw-semibold">
+                    Kategori
+                </label>
+
+                <select asp-for="Exercise.CategoryId"
+                        class="form-select">
+
+                    <option value="">
+                        Kategori seçin
+                    </option>
+
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">
+                            @category.Title
+                        </option>
+                    }
+
+                </select>
+
+                <span asp-validation-for="Exercise.CategoryId"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Exercise.ImagePath"
+                       class="form-label fw-semibold">
+                    Görsel Linki
+                </label>
+
+                <input asp-for="Exercise.ImagePath"
+                       class="form-control"
+                       placeholder="https://..." />
+
+                <span asp-validation-for="Exercise.ImagePath"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Exercise.VideoLinkPath"
+                       class="form-label fw-semibold">
+                    Video Linki
+                </label>
+
+                <input asp-for="Exercise.VideoLinkPath"
+                       class="form-control"
+                       placeholder="https://youtube.com/..." />
+
+                <span asp-validation-for="Exercise.VideoLinkPath"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <div class="d-flex justify-content-between">
+
+                <a href="/Exercise/List?mode=admin"
+                   class="btn btn-light border">
+                    ← Vazgeç
+                </a>
+
+                <button type="submit"
+                        class="btn btn-success px-4">
+                    Egzersizi Kaydet
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<style>
+
+    .form-wrapper {
+        width: 720px;
+        margin: 30px auto;
+        background: white;
+        border: 1px solid #e5e9e7;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 6px 25px rgba(0,0,0,.05);
+    }
+
+    .page-badge {
+        color: #198754;
+        background: #e8f5ee;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+
+</style>

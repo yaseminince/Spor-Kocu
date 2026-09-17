@@ -1,0 +1,293 @@
+﻿@page
+@model Sporkocu.Web.Pages.Admin.DashboardModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<style>
+
+    .admin-welcome {
+        background: #212529;
+        color: white;
+        border-radius: 20px;
+        padding: 35px;
+    }
+
+    .admin-card {
+        border: none;
+        border-radius: 18px;
+        transition: all 0.2s ease;
+    }
+
+        .admin-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .admin-icon {
+        font-size: 2.8rem;
+    }
+
+    .admin-card p {
+        color: #6c757d;
+        min-height: 48px;
+    }
+
+</style>
+
+
+<div class="container py-5">
+
+    <div class="admin-welcome shadow-sm mb-5">
+
+        <h1 class="fw-bold">
+            🏋️ Spor Koçu Admin Paneli
+        </h1>
+
+        <p class="mb-0 mt-2 opacity-75">
+            Sistem içerisindeki kullanıcıları ve içerikleri
+            buradan yönetebilirsiniz.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <!-- Kullanıcılar -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">👥</div>
+
+                    <h3 class="mt-3">
+                        Kullanıcılar
+                    </h3>
+
+                    <p>
+                        Kullanıcıları görüntüleyin,
+                        ekleyin, düzenleyin veya silin.
+                    </p>
+
+                    <a href="/User/List?mode=admin"
+                       class="btn btn-primary mt-auto">
+
+                        Kullanıcıları Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Kategoriler -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">📂</div>
+
+                    <h3 class="mt-3">
+                        Kategoriler
+                    </h3>
+
+                    <p>
+                        Sistem içerisindeki kategorileri
+                        yönetin.
+                    </p>
+
+                    <a href="/Category/List?mode=admin"
+                       class="btn btn-success mt-auto">
+
+                        Kategorileri Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Egzersizler -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">🏋️</div>
+
+                    <h3 class="mt-3">
+                        Egzersizler
+                    </h3>
+
+                    <p>
+                        Egzersiz kayıtlarını ekleyin,
+                        düzenleyin veya silin.
+                    </p>
+
+                    <a href="/Exercise/List?mode=admin"
+                       class="btn btn-warning mt-auto">
+
+                        Egzersizleri Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Besinler -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">🍎</div>
+
+                    <h3 class="mt-3">
+                        Besinler
+                    </h3>
+
+                    <p>
+                        Besin kayıtlarını ve
+                        bilgilerini yönetin.
+                    </p>
+
+                    <a href="/Food/List?mode=admin"
+                       class="btn btn-info mt-auto">
+
+                        Besinleri Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bloglar -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">📝</div>
+
+                    <h3 class="mt-3">
+                        Bloglar
+                    </h3>
+
+                    <p>
+                        Blog içeriklerini ekleyin,
+                        düzenleyin veya silin.
+                    </p>
+
+                    <a href="/Blog/List?mode=admin"
+                       class="btn btn-secondary mt-auto">
+
+                        Blogları Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sorular -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">❓</div>
+
+                    <h3 class="mt-3">
+                        Sorular
+                    </h3>
+
+                    <p>
+                        Kullanıcı sorularını
+                        yönetin.
+                    </p>
+
+                    <a href="/Question/List?mode=admin"
+                       class="btn btn-dark mt-auto">
+
+                        Soruları Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- Beslenme Planları -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card admin-card shadow-sm h-100">
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <div class="admin-icon">🥗</div>
+
+                    <h3 class="mt-3">
+                        Beslenme Planları
+                    </h3>
+
+                    <p>
+                        Kullanıcıların beslenme planlarını
+                        ve öğünlerini yönetin.
+                    </p>
+
+                    <a href="/NutritionPlan/List?mode=admin"
+                       class="btn btn-success mt-auto">
+
+                        Beslenme Planlarını Yönet
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

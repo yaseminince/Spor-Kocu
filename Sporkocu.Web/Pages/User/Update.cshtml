@@ -1,0 +1,161 @@
+﻿@page
+@model Sporkocu.Web.Pages.User.UpdateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Kullanıcıyı Düzenle";
+}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-sm"
+         style="max-width: 850px; margin: auto; border-radius: 20px;">
+
+        <div class="card-body p-5">
+
+            <h1 class="fw-bold mb-2">
+                Kullanıcıyı Düzenle
+            </h1>
+
+            <p class="text-muted mb-4">
+                Kullanıcı bilgilerini güncelleyin.
+            </p>
+
+
+            <form method="post">
+
+                <input type="hidden"
+                       asp-for="User.Id" />
+
+                <input type="hidden"
+                       name="mode"
+                       value="admin" />
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Ad Soyad
+                        </label>
+
+                        <input asp-for="User.FullName"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Email
+                        </label>
+
+                        <input asp-for="User.Email"
+                               type="email"
+                               class="form-control" />
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Şifre
+                    </label>
+
+                    <input asp-for="User.Password"
+                           type="password"
+                           class="form-control" />
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Adres
+                    </label>
+
+                    <textarea asp-for="User.Address"
+                              class="form-control"
+                              rows="3"></textarea>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Telefon
+                        </label>
+
+                        <input asp-for="User.Phone"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Premium Paket
+                        </label>
+
+                        <select asp-for="User.PremiumPackage"
+                                class="form-select">
+
+                            <option value="0">
+                                Standart
+                            </option>
+
+                            <option value="1">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Profil Fotoğrafı
+                    </label>
+
+                    <input asp-for="User.ProfilePicPath"
+                           class="form-control"
+                           placeholder="Profil fotoğrafı yolu" />
+
+                </div>
+
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a href="/User/List?mode=admin"
+                       class="btn btn-outline-secondary">
+                        Vazgeç
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Değişiklikleri Kaydet
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,145 @@
+﻿@page
+@model Sporkocu.Web.Pages.NutritionPlanDetail.ListModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Beslenme Planı Detayları";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <div>
+            <h1 class="fw-bold">
+                Beslenme Planı Detayları
+            </h1>
+
+            <p class="text-muted mb-0">
+                Planlara ait öğünleri ve besinleri yönetin.
+            </p>
+        </div>
+
+        <a href="/NutritionPlan/List?mode=admin"
+           class="btn btn-outline-secondary">
+            Planlara Dön
+        </a>
+
+    </div>
+
+
+    @if (!Model.Details.Any())
+    {
+        <div class="empty-card">
+
+            <div class="empty-icon">
+                🍽️
+            </div>
+
+            <h4 class="fw-bold mt-3">
+                Henüz detay bulunmuyor.
+            </h4>
+
+        </div>
+    }
+    else
+    {
+        <div class="detail-list">
+
+            @foreach (var detail in Model.Details)
+            {
+                var food = Model.Foods
+                    .FirstOrDefault(x => x.Id == detail.FoodId);
+
+                <div class="detail-card">
+
+                    <div class="detail-info">
+
+                        <div class="meal-name">
+                            @detail.Meal
+                        </div>
+
+                        <h4 class="fw-bold">
+                            @(food?.Title ?? "Besin bulunamadı")
+                        </h4>
+
+                        <div class="detail-meta">
+                            Plan ID: @detail.NutritionPlanId
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-actions">
+
+                        <a href="/NutritionPlanDetail/Update?id=@detail.Id&mode=admin"
+                           class="btn btn-outline-success btn-sm">
+                            Düzenle
+                        </a>
+
+                        <a href="/NutritionPlanDetail/Delete?id=@detail.Id&mode=admin"
+                           class="btn btn-outline-danger btn-sm">
+                            Sil
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+
+<style>
+
+    .detail-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .detail-card {
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 16px;
+        padding: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .meal-name {
+        color: #198754;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .detail-meta {
+        color: #8a958f;
+        font-size: 13px;
+    }
+
+    .detail-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .empty-card {
+        background: white;
+        border: 1px dashed #cfd8d3;
+        border-radius: 18px;
+        padding: 60px;
+        text-align: center;
+    }
+
+    .empty-icon {
+        font-size: 38px;
+    }
+
+</style>

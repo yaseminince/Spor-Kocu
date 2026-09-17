@@ -1,0 +1,150 @@
+﻿@page
+@model Sporkocu.Web.Pages.User.CreateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Yeni Kullanıcı";
+}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-sm"
+         style="max-width: 850px; margin: auto; border-radius: 20px;">
+
+        <div class="card-body p-5">
+
+            <h1 class="fw-bold mb-2">
+                Yeni Kullanıcı
+            </h1>
+
+            <p class="text-muted mb-4">
+                Sisteme yeni bir kullanıcı ekleyin.
+            </p>
+
+
+            <form method="post">
+
+                <input type="hidden"
+                       name="mode"
+                       value="admin" />
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Ad Soyad
+                        </label>
+
+                        <input asp-for="Request.Entity.FullName"
+                               class="form-control"
+                               placeholder="Ad Soyad" />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Email
+                        </label>
+
+                        <input asp-for="Request.Entity.Email"
+                               type="email"
+                               class="form-control"
+                               placeholder="ornek@email.com" />
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Şifre
+                    </label>
+
+                    <input asp-for="Request.Entity.Password"
+                           type="password"
+                           class="form-control"
+                           placeholder="Şifre" />
+
+                </div>
+
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+                        Adres
+                    </label>
+
+                    <textarea asp-for="Request.Entity.Address"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Adres"></textarea>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Telefon
+                        </label>
+
+                        <input asp-for="Request.Entity.Phone"
+                               class="form-control"
+                               placeholder="Telefon" />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+                            Premium Paket
+                        </label>
+
+                        <select asp-for="Request.Entity.PremiumPackage"
+                                class="form-select">
+
+                            <option value="0">
+                                Standart
+                            </option>
+
+                            <option value="1">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a href="/User/List?mode=admin"
+                       class="btn btn-outline-secondary">
+                        Vazgeç
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Kullanıcıyı Kaydet
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

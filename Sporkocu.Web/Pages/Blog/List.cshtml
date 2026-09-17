@@ -1,0 +1,221 @@
+﻿@page
+@model Sporkocu.Web.Pages.Blog.ListModel
+
+@{
+    ViewData["Title"] = "Bloglar";
+    Layout = Model.IsAdmin ? "_AdminLayout" : "_UserLayout";
+}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2>
+                @(Model.IsAdmin ? "Blog Yönetimi" : "Bloglar")
+            </h2>
+
+            <p class="text-muted mb-0">
+                @(Model.IsAdmin
+                    ? "Blog yazılarını buradan yönetebilirsin."
+                    : "Sağlıklı yaşam ve spor hakkında faydalı yazılar.")
+            </p>
+        </div>
+
+        @if (Model.IsAdmin)
+        {
+            <a href="/Blog/Create"
+               class="btn btn-success">
+                + Yeni Blog
+            </a>
+        }
+
+    </div>
+
+
+    @* USER TARAFI *@
+
+    @if (!Model.IsAdmin)
+    {
+        <div class="d-flex align-items-center gap-3 mb-4">
+
+            <form method="get" class="d-flex align-items-center gap-2">
+
+                <label for="SelectedCategoryId"
+                       class="fw-semibold">
+                    Kategori:
+                </label>
+
+                <select asp-for="SelectedCategoryId"
+                        class="form-select"
+                        style="width: 250px;"
+                        onchange="this.form.submit()">
+
+                    <option value="">
+                        Tüm Bloglar
+                    </option>
+
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">
+                            @category.Title
+                        </option>
+                    }
+
+                </select>
+
+            </form>
+
+            @if (Model.SelectedCategoryId.HasValue)
+            {
+                <a href="/Blog/List"
+                   class="btn btn-outline-secondary">
+                    Tüm Blogları Göster
+                </a>
+            }
+
+        </div>
+
+
+        @if (Model.Blogs.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var blog in Model.Blogs)
+                {
+                    var category = Model.Categories
+                        .FirstOrDefault(x => x.Id == blog.CategoryId);
+
+                    <div class="col-md-6 col-lg-4">
+
+                        <div class="card h-100 shadow-sm border-0">
+
+                            @if (!string.IsNullOrWhiteSpace(blog.CoverImagePath))
+                            {
+                                <img src="@blog.CoverImagePath"
+                                     class="card-img-top"
+                                     alt="@blog.Title"
+                                     style="height: 200px; object-fit: cover;" />
+                            }
+
+                            <div class="card-body d-flex flex-column">
+
+                                @if (category != null)
+                                {
+                                    <span class="badge bg-success align-self-start mb-3">
+                                        @category.Title
+                                    </span>
+                                }
+
+                                <h4 class="card-title">
+                                    @blog.Title
+                                </h4>
+
+                                @if (!string.IsNullOrWhiteSpace(blog.SubTitle))
+                                {
+                                    <p class="card-text text-muted">
+                                        @blog.SubTitle
+                                    </p>
+                                }
+
+                                <a href="/Blog/Detail?id=@blog.Id"
+                                   class="btn btn-outline-success mt-auto">
+                                    Devamını Oku →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                Bu kategoride henüz blog yazısı bulunmuyor.
+            </div>
+        }
+    }
+
+
+    @* ADMIN TARAFI *@
+
+    @if (Model.IsAdmin)
+    {
+        <div asp-validation-summary="All"
+             class="text-danger mb-3"></div>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered align-middle">
+
+                <thead>
+                    <tr>
+                        <th>BLOG</th>
+                        <th>KATEGORİ</th>
+                        <th style="width: 220px;">
+                            İŞLEMLER
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var blog in Model.Blogs)
+                    {
+                        var category = Model.Categories
+                            .FirstOrDefault(x => x.Id == blog.CategoryId);
+
+                        <tr>
+
+                            <td>
+                                <a href="/Blog/Detail?id=@blog.Id&mode=admin"
+                                   class="text-decoration-none">
+
+                                    <strong>
+                                        @blog.Title
+                                    </strong>
+
+                                </a>
+
+                                @if (!string.IsNullOrWhiteSpace(blog.SubTitle))
+                                {
+                                    <div class="text-muted mt-1">
+                                        @blog.SubTitle
+                                    </div>
+                                }
+
+                            </td>
+
+                            <td>
+                                @(category?.Title ?? "Kategori bulunamadı")
+                            </td>
+
+                            <td>
+
+                                <a href="/Blog/Update?id=@blog.Id&mode=admin"
+                                   class="btn btn-warning btn-sm">
+                                    Güncelle
+                                </a>
+
+                                <a href="/Blog/Delete?id=@blog.Id&mode=admin"
+                                   class="btn btn-danger btn-sm">
+                                    Sil
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    }
+
+</div>

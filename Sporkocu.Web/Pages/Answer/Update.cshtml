@@ -1,0 +1,86 @@
+﻿@page
+@model Sporkocu.Web.Pages.Answer.UpdateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Cevabı Düzenle";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h1 class="fw-bold">Cevabı Düzenle</h1>
+        <p class="text-muted">
+            Verilen cevabı güncelleyin.
+        </p>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="text-success fw-bold mb-2">
+                SORU
+            </div>
+
+            <h3 class="fw-bold">
+                @Model.Question.Title
+            </h3>
+
+            <p class="text-muted mb-0">
+                @Model.Question.Description
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card border-0 shadow-sm p-4">
+
+        <form method="post">
+
+            <input type="hidden"
+                   asp-for="Answer.Id" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Answer.Description"
+                       class="form-label fw-semibold">
+                    Cevap
+                </label>
+
+                <textarea asp-for="Answer.Description"
+                          class="form-control"
+                          rows="8"></textarea>
+
+                <span asp-validation-for="Answer.Description"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+
+            <div class="d-flex gap-2">
+
+                <button type="submit"
+                        class="btn btn-primary px-4">
+                    Güncelle
+                </button>
+
+                <a href="/Question/List?mode=admin"
+                   class="btn btn-outline-secondary">
+                    Vazgeç
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+﻿@page
+@model Sporkocu.Web.Pages.ScheduleLesson.CreateModel
+
+@{
+    ViewData["Title"] = "Ders Oluştur";
+    Layout = "_UserLayout";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Yeni Ders Oluştur</h2>
+
+    <form method="post">
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="ScheduleLesson.StartTime" class="form-label">
+                Tarih
+            </label>
+
+            <input asp-for="ScheduleLesson.StartTime"
+                   type="date"
+                   class="form-control" />
+
+            <span asp-validation-for="ScheduleLesson.StartTime"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ScheduleLesson.StartHour" class="form-label">
+                Başlangıç Saati
+            </label>
+
+            <input asp-for="ScheduleLesson.StartHour"
+                   type="time"
+                   class="form-control" />
+
+            <span asp-validation-for="ScheduleLesson.StartHour"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ScheduleLesson.EndHour" class="form-label">
+                Bitiş Saati
+            </label>
+
+            <input asp-for="ScheduleLesson.EndHour"
+                   type="time"
+                   class="form-control" />
+
+            <span asp-validation-for="ScheduleLesson.EndHour"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ScheduleLesson.Note" class="form-label">
+                Not
+            </label>
+
+            <textarea asp-for="ScheduleLesson.Note"
+                      class="form-control"
+                      rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Dersi Kaydet
+        </button>
+
+        <a asp-page="/ScheduleLesson/List"
+           class="btn btn-secondary">
+            Vazgeç
+        </a>
+
+    </form>
+
+</div>

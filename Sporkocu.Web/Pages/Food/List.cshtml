@@ -1,0 +1,260 @@
+﻿@page
+@model Sporkocu.Web.Pages.Food.ListModel
+
+@{
+    Layout = Model.IsAdmin ? "_AdminLayout" : "_UserLayout";
+    ViewData["Title"] = "Besinler";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h1 class="fw-bold mb-1">Besinler</h1>
+
+            @if (Model.IsAdmin)
+            {
+                <p class="text-muted mb-0">
+                    Besin kayıtlarını buradan yönetebilirsiniz.
+                </p>
+            }
+            else
+            {
+                <p class="text-muted mb-0">
+                    Besinlerin kalori ve besin değerlerini inceleyebilirsiniz.
+                </p>
+            }
+        </div>
+
+        @if (Model.IsAdmin)
+        {
+            <a href="/Food/Create?mode=admin"
+               class="btn btn-success">
+                + Yeni Besin
+            </a>
+        }
+
+    </div>
+
+
+    <!-- Arama -->
+
+    <form method="get" class="mb-4">
+
+        @if (Model.IsAdmin)
+        {
+            <input type="hidden"
+                   name="mode"
+                   value="admin" />
+        }
+
+        <div class="input-group">
+
+            <input type="text"
+                   name="Search"
+                   value="@Model.Search"
+                   class="form-control"
+                   placeholder="🔍 Besin ara..."
+                   style="height: 50px;" />
+
+            <button type="submit"
+                    class="btn btn-success px-4">
+
+                Ara
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    @if (!string.IsNullOrWhiteSpace(Model.Search))
+    {
+        <div class="mb-4 text-muted">
+
+            <strong>@Model.Search</strong>
+            için
+            <strong>@Model.Foods.Count</strong>
+            sonuç bulundu.
+
+        </div>
+    }
+
+
+    @if (Model.Foods.Count == 0)
+    {
+        <div class="card border-0 shadow-sm p-5 text-center">
+
+            @if (!string.IsNullOrWhiteSpace(Model.Search))
+            {
+                <h5>Aradığınız besin bulunamadı.</h5>
+
+                <p class="text-muted mb-3">
+                    Farklı bir besin adı ile tekrar deneyebilirsiniz.
+                </p>
+
+                <a href="@(Model.IsAdmin ? "/Food/List?mode=admin" : "/Food/List")"
+                   class="btn btn-outline-success">
+
+                    Tüm Besinleri Göster
+
+                </a>
+            }
+            else
+            {
+                <h5>Henüz besin bulunmuyor.</h5>
+
+                @if (Model.IsAdmin)
+                {
+                    <p class="text-muted mb-3">
+                        İlk besin kaydını oluşturabilirsiniz.
+                    </p>
+
+                    <a href="/Food/Create?mode=admin"
+                       class="btn btn-success">
+
+                        Yeni Besin Ekle
+
+                    </a>
+                }
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @foreach (var food in Model.Foods)
+            {
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card h-100 border-0 shadow-sm overflow-hidden">
+
+                        @if (!string.IsNullOrWhiteSpace(food.Image))
+                        {
+                            <img src="@food.Image"
+                                 class="card-img-top"
+                                 alt="@food.Title"
+                                 style="height:220px; object-fit:cover;" />
+                        }
+
+                        <div class="card-body">
+
+                            <h4 class="fw-bold mb-2">
+                                @food.Title
+                            </h4>
+
+                            @if (!string.IsNullOrWhiteSpace(food.Description))
+                            {
+                                <p class="text-muted">
+                                    @food.Description
+                                </p>
+                            }
+
+                            <div class="row g-2 mt-3">
+
+                                <div class="col-6">
+
+                                    <div class="bg-light rounded p-3 text-center">
+
+                                        <div class="small text-muted">
+                                            Kalori
+                                        </div>
+
+                                        <strong>
+                                            @food.Calorie
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-6">
+
+                                    <div class="bg-light rounded p-3 text-center">
+
+                                        <div class="small text-muted">
+                                            Protein
+                                        </div>
+
+                                        <strong>
+                                            @food.Protein
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-6">
+
+                                    <div class="bg-light rounded p-3 text-center">
+
+                                        <div class="small text-muted">
+                                            Karbonhidrat
+                                        </div>
+
+                                        <strong>
+                                            @food.Carbonhydrate
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-6">
+
+                                    <div class="bg-light rounded p-3 text-center">
+
+                                        <div class="small text-muted">
+                                            Yağ
+                                        </div>
+
+                                        <strong>
+                                            @food.Oil
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            @if (Model.IsAdmin)
+                            {
+                                <div class="d-flex gap-2 mt-4">
+
+                                    <a href="/Food/Update?id=@food.Id&mode=admin"
+                                       class="btn btn-outline-primary flex-fill">
+
+                                        Düzenle
+
+                                    </a>
+
+                                    <a href="/Food/Delete?id=@food.Id&mode=admin"
+                                       class="btn btn-outline-danger flex-fill">
+
+                                        Sil
+
+                                    </a>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

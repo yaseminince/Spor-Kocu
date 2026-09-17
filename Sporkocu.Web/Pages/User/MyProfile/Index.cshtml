@@ -1,0 +1,595 @@
+﻿@page
+@model Sporkocu.Web.Pages.User.MyProfile.IndexModel
+
+@{
+    Layout = "_UserLayout";
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="container py-5">
+
+    <!-- BAŞLIK -->
+
+    <div class="profile-header mb-4">
+
+        <div>
+            <span class="profile-badge">
+                HESABIM
+            </span>
+
+            <h1 class="fw-bold mt-3 mb-2">
+                Profilim
+            </h1>
+
+            <p class="text-muted mb-0">
+                Kişisel bilgilerinizi ve profilinizi yönetin.
+            </p>
+        </div>
+
+        <div class="current-avatar">
+
+            @if (!string.IsNullOrWhiteSpace(Model.User?.ProfilePicPath))
+            {
+                <img src="@Model.User.ProfilePicPath"
+                     alt="Profil Avatarı" />
+            }
+            else
+            {
+                <span>👤</span>
+            }
+
+        </div>
+
+    </div>
+
+
+    <!-- BAŞARI MESAJI -->
+    @if (ViewData["SuccessMessage"] != null)
+    {
+        <div class="success-message mb-4">
+            ✓ @ViewData["SuccessMessage"]
+        </div>
+    }
+
+
+    <div class="profile-card">
+
+        <form method="post">
+
+            <div asp-validation-summary="All"
+                 class="text-danger mb-3">
+            </div>
+
+
+            <!-- AVATAR SEÇİMİ -->
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    🎭
+                </div>
+
+                <div>
+                    <h3>Profil Avatarı</h3>
+                    <p>
+                        Profilinizde kullanmak istediğiniz avatarı seçin.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="avatar-grid">
+
+                <!-- SANDY -->
+
+                <label class="avatar-option">
+
+                    <input type="radio"
+                           name="User.ProfilePicPath"
+                           value="/images/avatars/avatar-sandy.jpg"
+                    @(Model.User?.ProfilePicPath == "/images/avatars/avatar-sandy.jpg"
+                        ? "checked"
+                        : "") />
+
+                    <div class="avatar-card">
+
+                        <img src="/images/avatars/avatar-sandy.jpg"
+                             alt="Sandy avatarı" />
+
+                        <div class="avatar-name">
+                            Sandy
+                        </div>
+
+                    </div>
+
+                </label>
+
+
+                <!-- SPONGEBOB -->
+
+                <label class="avatar-option">
+
+                    <input type="radio"
+                           name="User.ProfilePicPath"
+                           value="/images/avatars/avatar-spongebob.jpg"
+                    @(Model.User?.ProfilePicPath == "/images/avatars/avatar-spongebob.jpg"
+                        ? "checked"
+                        : "") />
+
+                    <div class="avatar-card">
+
+                        <img src="/images/avatars/avatar-spongebob.jpg"
+                             alt="SpongeBob avatarı" />
+
+                        <div class="avatar-name">
+                            SpongeBob
+                        </div>
+
+                    </div>
+
+                </label>
+
+
+                <!-- SQUIDWARD -->
+
+                <label class="avatar-option">
+
+                    <input type="radio"
+                           name="User.ProfilePicPath"
+                           value="/images/avatars/avatar-squidward.jpg"
+                    @(Model.User?.ProfilePicPath == "/images/avatars/avatar-squidward.jpg"
+                        ? "checked"
+                        : "") />
+
+                    <div class="avatar-card">
+
+                        <img src="/images/avatars/avatar-squidward.jpg"
+                             alt="Squidward avatarı" />
+
+                        <div class="avatar-name">
+                            Squidward
+                        </div>
+
+                    </div>
+
+                </label>
+
+
+                <!-- PATRICK -->
+
+                <label class="avatar-option">
+
+                    <input type="radio"
+                           name="User.ProfilePicPath"
+                           value="/images/avatars/avatar-patrick.jpg"
+                    @(Model.User?.ProfilePicPath == "/images/avatars/avatar-patrick.jpg"
+                        ? "checked"
+                        : "") />
+
+                    <div class="avatar-card">
+
+                        <img src="/images/avatars/avatar-patrick.jpg"
+                             alt="Patrick avatarı" />
+
+                        <div class="avatar-name">
+                            Patrick
+                        </div>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <!-- KİŞİSEL BİLGİLER -->
+
+            <div class="section-title">
+
+                <div class="section-icon">
+                    👤
+                </div>
+
+                <div>
+                    <h3>Kişisel Bilgiler</h3>
+                    <p>
+                        Kişisel bilgilerinizi güncelleyin.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- AD SOYAD -->
+
+                <div class="col-md-6">
+
+                    <label asp-for="User.FullName"
+                           class="form-label">
+                        Ad Soyad
+                    </label>
+
+                    <input asp-for="User.FullName"
+                           class="form-control"
+                           placeholder="Ad Soyad" />
+
+                    <span asp-validation-for="User.FullName"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="col-md-6">
+
+                    <label asp-for="User.Email"
+                           class="form-label">
+                        E-posta
+                    </label>
+
+                    <input asp-for="User.Email"
+                           type="email"
+                           class="form-control"
+                           placeholder="E-posta adresiniz" />
+
+                    <span asp-validation-for="User.Email"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+
+                <!-- TELEFON -->
+
+                <div class="col-md-6">
+
+                    <label asp-for="User.Phone"
+                           class="form-label">
+                        Telefon
+                    </label>
+
+                    <input asp-for="User.Phone"
+                           class="form-control"
+                           placeholder="Telefon numaranız" />
+
+                    <span asp-validation-for="User.Phone"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+
+                <!-- ADRES -->
+
+                <div class="col-md-6">
+
+                    <label asp-for="User.Address"
+                           class="form-label">
+                        Adres
+                    </label>
+
+                    <input asp-for="User.Address"
+                           class="form-control"
+                           placeholder="Adresiniz" />
+
+                    <span asp-validation-for="User.Address"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <!-- ŞİFRE -->
+
+            <div class="section-title">
+
+                <div class="section-icon password-icon">
+                    🔒
+                </div>
+
+                <div>
+                    <h3>Şifre Değiştir</h3>
+
+                    <p>
+                        Şifrenizi değiştirmek istemiyorsanız
+                        bu alanları boş bırakabilirsiniz.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- MEVCUT ŞİFRE -->
+
+                <div class="col-md-4">
+
+                    <label asp-for="CurrentPassword"
+                           class="form-label">
+                        Mevcut Şifre
+                    </label>
+
+                    <input asp-for="CurrentPassword"
+                           type="password"
+                           class="form-control"
+                           placeholder="••••••••" />
+
+                    <span asp-validation-for="CurrentPassword"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+
+                <!-- YENİ ŞİFRE -->
+
+                <div class="col-md-4">
+
+                    <label asp-for="NewPassword"
+                           class="form-label">
+                        Yeni Şifre
+                    </label>
+
+                    <input asp-for="NewPassword"
+                           type="password"
+                           class="form-control"
+                           placeholder="••••••••" />
+
+                    <span asp-validation-for="NewPassword"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+
+                <!-- YENİ ŞİFRE TEKRAR -->
+
+                <div class="col-md-4">
+
+                    <label asp-for="NewPasswordAgain"
+                           class="form-label">
+                        Yeni Şifre Tekrar
+                    </label>
+
+                    <input asp-for="NewPasswordAgain"
+                           type="password"
+                           class="form-control"
+                           placeholder="••••••••" />
+
+                    <span asp-validation-for="NewPasswordAgain"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- KAYDET -->
+
+            <div class="save-area">
+
+                <button type="submit"
+                        class="save-button">
+
+                    Değişiklikleri Kaydet
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .profile-badge {
+        color: #198754;
+        background: #e8f5ee;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .current-avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #e8f5ee;
+        border: 4px solid white;
+        box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 35px;
+    }
+
+        .current-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .profile-card {
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 22px;
+        padding: 35px;
+        box-shadow: 0 6px 25px rgba(0,0,0,.05);
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 25px;
+    }
+
+    .section-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: #e8f5ee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .password-icon {
+        background: #f1f3f2;
+    }
+
+    .section-title h3 {
+        margin: 0;
+        font-size: 19px;
+        font-weight: 700;
+        color: #17221c;
+    }
+
+    .section-title p {
+        margin: 4px 0 0;
+        color: #78847d;
+        font-size: 13px;
+    }
+
+    /* AVATARLAR */
+
+    .avatar-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 10px;
+    }
+
+    .avatar-option {
+        cursor: pointer;
+        display: block;
+    }
+
+        .avatar-option input {
+            display: none;
+        }
+
+    .avatar-card {
+        border: 2px solid #e4ebe7;
+        border-radius: 18px;
+        padding: 12px;
+        background: #fafcfb;
+        text-align: center;
+        transition: .2s;
+    }
+
+        .avatar-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+            margin: 0 auto 12px;
+        }
+
+    .avatar-name {
+        font-weight: 600;
+        color: #37433d;
+        font-size: 14px;
+        padding-bottom: 4px;
+    }
+
+    .avatar-option input:checked + .avatar-card {
+        border-color: #198754;
+        background: #f0f9f4;
+        box-shadow: 0 0 0 3px rgba(25,135,84,.10);
+    }
+
+    .avatar-option:hover .avatar-card {
+        border-color: #8fc9a9;
+        transform: translateY(-2px);
+    }
+
+    .divider {
+        height: 1px;
+        background: #edf1ee;
+        margin: 35px 0;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #37433d;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border: 1px solid #dce4df;
+        border-radius: 10px;
+        padding: 12px 14px;
+        min-height: 48px;
+    }
+
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 3px rgba(25,135,84,.10);
+        }
+
+    .save-area {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 35px;
+        padding-top: 25px;
+        border-top: 1px solid #edf1ee;
+    }
+
+    .save-button {
+        border: none;
+        background: #198754;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+        .save-button:hover {
+            background: #157347;
+            transform: translateY(-1px);
+        }
+
+    .success-message {
+        background: #e8f5ee;
+        border: 1px solid #cde8d8;
+        color: #198754;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-weight: 600;
+    }
+
+</style>

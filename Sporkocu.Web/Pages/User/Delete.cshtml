@@ -1,0 +1,80 @@
+﻿@page
+@model Sporkocu.Web.Pages.User.DeleteModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Kullanıcıyı Sil";
+}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-sm"
+         style="max-width: 700px; margin: auto; border-radius: 20px;">
+
+        <div class="card-body p-5 text-center">
+
+            <div style="font-size: 50px;">
+                ⚠️
+            </div>
+
+            <h1 class="fw-bold mt-3">
+                Kullanıcıyı Sil
+            </h1>
+
+            <p class="text-muted mt-3">
+                Bu kullanıcıyı silmek istediğinizden emin misiniz?
+            </p>
+
+
+            <div class="bg-light rounded-3 p-4 my-4">
+
+                <h4 class="fw-bold mb-2">
+                    @Model.User.FullName
+                </h4>
+
+                <p class="text-muted mb-1">
+                    @Model.User.Email
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(Model.User.Phone))
+                {
+                    <p class="text-muted mb-0">
+                        @Model.User.Phone
+                    </p>
+                }
+
+            </div>
+
+
+            <form method="post">
+
+                <input type="hidden"
+                       name="id"
+                       value="@Model.User.Id" />
+
+                <input type="hidden"
+                       name="mode"
+                       value="admin" />
+
+
+                <div class="d-flex justify-content-center gap-2">
+
+                    <a href="/User/List?mode=admin"
+                       class="btn btn-outline-secondary">
+                        Vazgeç
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Kullanıcıyı Sil
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

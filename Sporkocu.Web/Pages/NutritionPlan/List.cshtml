@@ -1,0 +1,288 @@
+﻿@page
+@model Sporkocu.Web.Pages.NutritionPlan.ListModel
+
+@{
+    Layout = Model.IsAdmin ? "_AdminLayout" : "_UserLayout";
+    ViewData["Title"] = Model.IsAdmin
+        ? "Beslenme Planları"
+        : "Beslenme Planım";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+
+        <div>
+            <h1 class="fw-bold mb-2">
+                Beslenme Planları
+            </h1>
+
+            <p class="text-muted mb-0">
+                Beslenme planlarını inceleyin.
+            </p>
+        </div>
+
+        @if (Model.IsAdmin)
+        {
+            <a href="/NutritionPlan/Create?mode=admin"
+               class="btn btn-success">
+                + Yeni Plan
+            </a>
+        }
+
+    </div>
+
+
+    @if (!Model.NutritionPlans.Any())
+    {
+        <div class="empty-card">
+
+            <div class="empty-icon">
+                🥗
+            </div>
+
+            <h4 class="fw-bold mt-3">
+                Henüz beslenme planı bulunmuyor.
+            </h4>
+
+            @if (!Model.IsAdmin)
+            {
+                <p class="text-muted mb-0">
+                    Beslenme planları eklendiğinde
+                    burada görüntüleyebilirsiniz.
+                </p>
+            }
+
+        </div>
+    }
+    else
+    {
+        @foreach (var plan in Model.NutritionPlans)
+        {
+            <div class="plan-card mb-4">
+
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+
+                        <span class="plan-badge">
+                            BESLENME PLANI
+                        </span>
+
+                        <h2 class="fw-bold mt-3 mb-2">
+                            @plan.Title
+                        </h2>
+
+                        @if (!string.IsNullOrWhiteSpace(plan.Description))
+                        {
+                            <p class="text-muted mb-0">
+                                @plan.Description
+                            </p>
+                        }
+
+                    </div>
+
+
+                    @if (Model.IsAdmin)
+                    {
+                        <div class="d-flex gap-2">
+
+                            <a href="/NutritionPlan/Update?id=@plan.Id&mode=admin"
+                               class="btn btn-outline-success btn-sm">
+                                Düzenle
+                            </a>
+
+                            <a href="/NutritionPlan/Delete?id=@plan.Id&mode=admin"
+                               class="btn btn-outline-danger btn-sm">
+                                Sil
+                            </a>
+
+                        </div>
+                    }
+
+                </div>
+
+
+                @{
+                    var planDetails = Model.Details
+                        .Where(x => x.NutritionPlanId == plan.Id)
+                        .ToList();
+                }
+
+
+                @if (planDetails.Any())
+                {
+                    <div class="meals">
+
+                        @foreach (var detail in planDetails)
+                        {
+                            var food = Model.Foods
+                                .FirstOrDefault(x => x.Id == detail.FoodId);
+
+                            <div class="meal-row">
+
+                                <div class="meal-icon">
+                                    🍽️
+                                </div>
+
+                                <div class="meal-content">
+
+                                    <div class="meal-name">
+                                        @detail.Meal
+                                    </div>
+
+                                    @if (food != null)
+                                    {
+                                        <h5 class="fw-bold mb-1">
+                                            @food.Title
+                                        </h5>
+
+                                        <div class="nutrition-info">
+
+                                            <span>
+                                                🔥 @food.Calorie
+                                            </span>
+
+                                            <span>
+                                                Protein: @food.Protein
+                                            </span>
+
+                                            <span>
+                                                Karbonhidrat: @food.Carbonhydrate
+                                            </span>
+
+                                            <span>
+                                                Yağ: @food.Oil
+                                            </span>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+
+                                @if (Model.IsAdmin)
+                                {
+                                    <div class="d-flex gap-2">
+
+                                        <a href="/NutritionPlanDetail/Update?id=@detail.Id&mode=admin"
+                                           class="btn btn-outline-success btn-sm">
+                                            Düzenle
+                                        </a>
+
+                                        <a href="/NutritionPlanDetail/Delete?id=@detail.Id&mode=admin"
+                                           class="btn btn-outline-danger btn-sm">
+                                            Sil
+                                        </a>
+
+                                    </div>
+                                }
+
+                            </div>
+                        }
+
+                    </div>
+                }
+
+
+                @if (Model.IsAdmin)
+                {
+                    <div class="mt-4">
+
+                        <a href="/NutritionPlanDetail/Create?nutritionPlanId=@plan.Id&mode=admin"
+                           class="btn btn-success btn-sm">
+                            + Öğün Ekle
+                        </a>
+
+                    </div>
+                }
+
+            </div>
+        }
+    }
+
+</div>
+
+
+<style>
+
+    .plan-card {
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .plan-badge {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #198754;
+        background: #e8f5ee;
+        padding: 7px 12px;
+        border-radius: 20px;
+    }
+
+    .meals {
+        margin-top: 25px;
+        border-top: 1px solid #edf1ee;
+        padding-top: 20px;
+    }
+
+    .meal-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 17px 0;
+        border-bottom: 1px solid #f0f3f1;
+    }
+
+        .meal-row:last-child {
+            border-bottom: none;
+        }
+
+    .meal-icon {
+        width: 48px;
+        height: 48px;
+        background: #e8f5ee;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        flex-shrink: 0;
+    }
+
+    .meal-content {
+        flex: 1;
+    }
+
+    .meal-name {
+        color: #198754;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .nutrition-info {
+        display: flex;
+        gap: 15px;
+        color: #737e78;
+        font-size: 12px;
+    }
+
+    .empty-card {
+        background: white;
+        border: 1px dashed #cfd8d3;
+        border-radius: 18px;
+        padding: 60px;
+        text-align: center;
+    }
+
+    .empty-icon {
+        font-size: 38px;
+    }
+
+</style>

@@ -1,0 +1,146 @@
+﻿@page
+@model Sporkocu.Web.Pages.NutritionPlanDetail.UpdateModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Öğünü Düzenle";
+}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Öğünü Düzenle
+        </h1>
+
+        <p class="text-muted">
+            Beslenme planındaki öğün bilgilerini güncelleyin.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <form method="post">
+
+            <input type="hidden"
+                   asp-for="Detail.Id" />
+
+            <input type="hidden"
+                   name="mode"
+                   value="admin" />
+
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-4">
+            </div>
+
+
+            <div class="mb-4">
+
+                <label asp-for="Detail.NutritionPlanId"
+                       class="form-label">
+                    Beslenme Planı ID
+                </label>
+
+                <input asp-for="Detail.NutritionPlanId"
+                       class="form-control"
+                       readonly />
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <label asp-for="Detail.Meal"
+                       class="form-label">
+                    Öğün
+                </label>
+
+                <input asp-for="Detail.Meal"
+                       class="form-control"
+                       placeholder="Örneğin: Kahvaltı" />
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <label asp-for="Detail.FoodId"
+                       class="form-label">
+                    Besin
+                </label>
+
+                <select asp-for="Detail.FoodId"
+                        class="form-select">
+
+                    <option value="">
+                        Besin seçiniz
+                    </option>
+
+                    @foreach (var food in Model.Foods)
+                    {
+                        <option value="@food.Id">
+                            @food.Title
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <a href="/NutritionPlan/List?mode=admin"
+                   class="btn btn-outline-secondary">
+                    Vazgeç
+                </a>
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Değişiklikleri Kaydet
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .form-card {
+        max-width: 750px;
+        background: white;
+        border: 1px solid #e4ebe7;
+        border-radius: 18px;
+        padding: 35px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.04);
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 10px;
+        padding: 12px 14px;
+    }
+
+    .form-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 30px;
+        padding-top: 25px;
+        border-top: 1px solid #edf1ee;
+    }
+
+</style>

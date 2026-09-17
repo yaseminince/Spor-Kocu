@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sporkocu.Domain.Base
+{
+    public class BaseEntity : IEntity
+    {
+        public int Id { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; } // ? updateddatein null da olabileceğini gösteriyor
+        public int Status { get; set;  }
+    }
+}

@@ -1,0 +1,139 @@
+﻿@page
+@model Sporkocu.Web.Pages.Category.ListModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Kategoriler";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="fw-bold mb-2">Kategoriler</h1>
+            <p class="text-muted mb-0">
+                Egzersiz ve içerik kategorilerini yönetin.
+            </p>
+        </div>
+
+        <a href="/Category/Create?mode=admin"
+           class="btn btn-success px-4">
+            + Yeni Kategori
+        </a>
+    </div>
+
+    @if (!Model.Categories.Any())
+    {
+        <div class="empty-card">
+            <div class="empty-icon">📂</div>
+            <h4 class="fw-bold mt-3">Henüz kategori bulunmuyor.</h4>
+            <p class="text-muted mb-0">
+                Yeni bir kategori ekleyerek başlayabilirsiniz.
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="category-grid">
+
+            @foreach (var category in Model.Categories)
+            {
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        📁
+                    </div>
+
+                    <div class="category-content">
+                        <h4 class="fw-bold mb-2">
+                            @category.Title
+                        </h4>
+
+                        @if (!string.IsNullOrWhiteSpace(category.Description))
+                        {
+                            <p class="text-muted mb-0">
+                                @category.Description
+                            </p>
+                        }
+                    </div>
+
+                    <div class="category-actions">
+
+                        <a href="/Category/Update?id=@category.Id&mode=admin"
+                           class="btn btn-outline-success btn-sm">
+                            Düzenle
+                        </a>
+
+                        <a href="/Category/Delete?id=@category.Id&mode=admin"
+                           class="btn btn-outline-danger btn-sm">
+                            Sil
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+<style>
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .category-card {
+        background: white;
+        border: 1px solid #e5e9e7;
+        border-radius: 18px;
+        padding: 25px;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 5px 18px rgba(0,0,0,.04);
+    }
+
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        background: #e8f5ee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 23px;
+        margin-bottom: 18px;
+    }
+
+    .category-content {
+        flex: 1;
+    }
+
+        .category-content h4 {
+            color: #263238;
+        }
+
+    .category-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .empty-card {
+        background: white;
+        border: 1px dashed #cfd8d3;
+        border-radius: 18px;
+        padding: 60px;
+        text-align: center;
+    }
+
+    .empty-icon {
+        font-size: 40px;
+    }
+
+</style>
